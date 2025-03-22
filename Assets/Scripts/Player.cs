@@ -5,11 +5,9 @@ public class Player : MonoBehaviour
 {
     public GameObject spawn;
     public float movementSpeed = 3;
-    public float rotationSpeed = 3;
     public int lives = 3;
 
     private Rigidbody rb;
-    private Vector3 movement;
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +28,22 @@ public class Player : MonoBehaviour
     // Fixed update is called once per physics frame
     void FixedUpdate()
     {
-        movement = new Vector3((Input.GetAxis("Horizontal") + 0.001f) * movementSpeed, 0, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), rotationSpeed);
+        // moves the player left or right
+        Vector3 movement = new Vector3((Input.GetAxis("Horizontal")) * movementSpeed, 0, 0);
         transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
+
+        //rotates the player when changing direction
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            transform.rotation = Quaternion.LookRotation(movement);
+        }
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            transform.rotation = Quaternion.LookRotation(movement);
+        }
     }
 
-    // Called if the object collides with something
+    // Called if the player collides with something
     void OnCollisionEnter(Collision collision)
     {
         // Respawns the player if they collide with an enemy
