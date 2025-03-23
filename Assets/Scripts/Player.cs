@@ -4,12 +4,16 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameObject spawn;
+    public GameObject berry;
+    public GameObject carrot;
     public float movementSpeed;
     public float jumpSpeed;
     public int lives;
 
     private Rigidbody rb;
     private bool isGrounded;
+    private bool isBerry = false;
+    private bool isCarrot = true;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,15 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
             isGrounded = false;
+        }
+
+        // allows the player to switch between characters
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isBerry = !isBerry;
+            isCarrot = !isCarrot;
+            berry.SetActive(isBerry);
+            carrot.SetActive(isCarrot);
         }
 
         // Respawns the player if they fall below the level
