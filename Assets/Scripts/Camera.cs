@@ -1,60 +1,58 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-// Moves the camera with the specified target within the specified area
+// Moves the camera with the specified target within the specified limits
 public class Camera : MonoBehaviour
 {
     public Transform target;
+    public float cameraOffestY;
     public float leftLimit;
     public float rightLimit;
-    public float topLimit;
     public float bottomLimit;
+    public float topLimit;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private float xPos;
+    private float yPos;
+    private float zPos;
 
     // Update is called once per frame
     void Update()
     {
+        // only follows the target if it exists
         if(target != null)
         {
-            if (target.position.y > 2.5)
+            // handles x position
+            if (target.position.x < leftLimit)
             {
-                if (target.position.x < -11.65)
-                {
-                    transform.position = new Vector3(-11.65f, (target.position.y - 2.5f), transform.position.z);
-                }
-                else if (target.position.x > 74.25)
-                {
-                    transform.position = new Vector3(74.25f, (target.position.y - 2.5f), transform.position.z);
-                }
-                else
-                {
-                    transform.position = new Vector3(target.position.x, (target.position.y - 2.5f), transform.position.z);
-                }
+                xPos = leftLimit;
             }
-            else if (target.position.y < -3)
+            else if (target.position.x > rightLimit)
             {
-                transform.position = new Vector3(0, -13, -1);
+                xPos = rightLimit;
             }
             else
             {
-                if (target.position.x < -11.65)
-                {
-                    transform.position = new Vector3(-11.65f, 0, transform.position.z);
-                }
-                else if (target.position.x > 74.25)
-                {
-                    transform.position = new Vector3(74.25f, 0, transform.position.z);
-                }
-                else
-                {
-                    transform.position = new Vector3(target.position.x, 0, transform.position.z);
-                }
+                xPos = target.position.x;
             }
+
+            // handles y position
+            if (target.position.y < bottomLimit)
+            {
+                yPos = bottomLimit + cameraOffestY;
+            }
+            else if (target.position.y > topLimit)
+            {
+                yPos = topLimit + cameraOffestY;
+            }
+            else
+            {
+                yPos = target.position.y + cameraOffestY;
+            }
+
+            // sets constamt z position
+            zPos = transform.position.z;
+
+            // moves the camera to the correct position
+            transform.position = new Vector3(xPos, yPos, zPos);
         }
     }
 }
