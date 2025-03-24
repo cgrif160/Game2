@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private bool isBerry = false;
     private bool isCarrot = true;
 
-    // Start is called before the first frame update
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
