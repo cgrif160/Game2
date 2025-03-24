@@ -1,17 +1,26 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 // Handles the player's movement
 public class Player : MonoBehaviour
 {
     public GameObject spawn;
-    public float movementSpeed;
-    public float jumpSpeed;
+    public GameObject berry;
+    public GameObject carrot;
     public int lives;
+    public float movementSpeed;
+    public float berryMass;
+    public float carrotMass;
+    public float berryJumpSpeed;
+    public float carrotJumpSpeed;
 
     private Rigidbody rb;
     private bool isGrounded;
+    private float jumpSpeed;
+    private bool isBerry = false;
+    private bool isCarrot = true;
 
-    // Start is called before the first frame update
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -21,12 +30,34 @@ public class Player : MonoBehaviour
     void Update()
     {
         // moves the player left or right
-        rb.linearVelocity = new Vector3((Input.GetAxis("Horizontal")) * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
+        rb.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
 
         //rotates the player when changing direction
         if (Input.GetAxis("Horizontal") != 0)
         {
-            transform.rotation = Quaternion.LookRotation(new Vector3((Input.GetAxis("Horizontal")) * movementSpeed, 0f, 0f));
+            transform.rotation = Quaternion.LookRotation(new Vector3(Input.GetAxis("Horizontal"), 0f, 0f));
+            transform.Rotate(0f, 90f, 0f);
+        }
+
+        // allows the player to switch between characters
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            isBerry = !isBerry;
+            isCarrot = !isCarrot;
+            berry.SetActive(isBerry);
+            carrot.SetActive(isCarrot);
+        }
+
+        // adjusts the player's variables based on the character
+        if (isBerry)
+        {
+            rb.mass = berryMass;
+            jumpSpeed = berryJumpSpeed;
+        }
+        else if (isCarrot)
+        {
+            rb.mass = carrotMass;
+            jumpSpeed = carrotJumpSpeed;
         }
 
         // handles player jumping
@@ -49,10 +80,21 @@ public class Player : MonoBehaviour
         // Checks if the player is colliding with the ground
         if (collision.gameObject.tag == "Ground")
         {
-            if (collision.contacts[0].normal.y == 1) // Checks if colliding with the top of the collision
+            // Checks if colliding with the top of the collision
+            if (collision.contacts[0].normal.y == 1)
             {
                 isGrounded = true;
             }
+        }
+    }
+
+    // Called when the player leaves a collision
+    void OnCollisionExit(Collision collision)
+    {
+        // Prevents the player from jumping in the air after falling off of a platform
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
         }
     }
 
