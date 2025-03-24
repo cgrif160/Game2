@@ -7,14 +7,45 @@ public class Player : MonoBehaviour
     public float movementSpeed;
     public float jumpSpeed;
     public int lives;
+    public int carrots;
+    public int berries;
 
     private Rigidbody rb;
     private bool isGrounded;
+    private static Player _instance;
+
+    //Creates one instance of script
+    public static Player Instance
+    {
+        get
+        {
+            if(_instance == null)
+            {
+                Debug.LogError("Player is null");
+            }
+            return _instance;
+        }
+    }
+    void Awake()
+    {
+        _instance = this;
+    }
+
+    public void AddCarrots()
+    {
+        carrots++;
+    }
+    public void AddBerries()
+    {
+        berries++;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        carrots = 0;
+        berries = 0;
     }
 
     // Update is called once per frame
@@ -41,6 +72,8 @@ public class Player : MonoBehaviour
         {
             Respawn();
         }
+        UIManager.Instance.UpdateCarrotsText(carrots);
+        UIManager.Instance.UpdateBerriesText(berries);
     }
 
     // Called if the player collides with something
