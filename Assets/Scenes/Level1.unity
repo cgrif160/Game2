@@ -163,9 +163,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 253327525}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba5516c9f141c34698fd0784953a076, type: 3}
+  m_Script: {fileID: 11500000, guid: 875af2c0d35d8f0438b216dd044fc1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawn: {fileID: 648165684}
+  berry: {fileID: 1717158894}
+  carrot: {fileID: 1908988731}
+  lives: 3
+  movementSpeed: 10
+  berryMass: 100
+  carrotMass: 1
+  berryJumpSpeed: 500
+  carrotJumpSpeed: 7
 --- !u!54 &253327528
 Rigidbody:
   m_ObjectHideFlags: 0
