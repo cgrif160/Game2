@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 // Handles the player's movement
 public class Player : MonoBehaviour
@@ -79,7 +78,23 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Called if the player collides with something
+    //  Called if the player collides with a trigger
+    void OnTriggerEnter(Collider collision)
+    {
+        // Checks if the player is colliding with a berry collectible
+        if (collision.gameObject.tag == "Berry" && isBerry)
+        {
+            Destroy(collision.gameObject);
+        }
+
+        // Checks if the player is colliding with a carrot collectible
+        if (collision.gameObject.tag == "Carrot" && isCarrot)
+        {
+            Destroy(collision.gameObject);
+        }
+    }
+
+    // Called if the player is colliding with something
     void OnCollisionStay(Collision collision)
     {
         // Checks if the player is colliding with the ground
