@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   top: {fileID: 8962197320309674336}
-  purple: {fileID: 2100000, guid: fe4242e774069a0408c669ba229bce71, type: 2}
-  orange: {fileID: 2100000, guid: 9e6f80c7ee4d29f42af52b946a1be502, type: 2}
+  purple: {fileID: 2100000, guid: 54a54fc048097f142a91fb3cd80072d5, type: 2}
+  orange: {fileID: 2100000, guid: af4f5d6eb65c2124a87c5df366bffd86, type: 2}
 --- !u!1 &8962197320309674336
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +116,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b03e49a447ec2e246a4bfa4fa98c3558, type: 2}
+  - {fileID: 2100000, guid: 54a54fc048097f142a91fb3cd80072d5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -277,7 +277,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: de517dd82af6a734cbd452f0ba19ebdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
