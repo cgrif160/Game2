@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 // Handles the player's movement
 public class Player : MonoBehaviour
@@ -19,6 +18,8 @@ public class Player : MonoBehaviour
     private float jumpSpeed;
     private bool isBerry = false;
     private bool isCarrot = true;
+    private int berryCount = 0;
+    private int carrotCount = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,17 +30,22 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // moves the player left or right
+        // Moves the player left or right
         rb.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
 
-        //rotates the player when changing direction
+        // Rotates the player when changing direction
         if (Input.GetAxis("Horizontal") != 0)
         {
             transform.rotation = Quaternion.LookRotation(new Vector3(Input.GetAxis("Horizontal"), 0f, 0f));
             transform.Rotate(0f, 90f, 0f);
         }
+        // Otherwise face forward
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(-1f, 0f, 0f));
+        }
 
-        // allows the player to switch between characters
+        // Allows the player to switch between characters
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isBerry = !isBerry;
@@ -48,7 +54,7 @@ public class Player : MonoBehaviour
             carrot.SetActive(isCarrot);
         }
 
-        // adjusts the player's variables based on the character
+        // Adjusts the player's variables based on the character
         if (isBerry)
         {
             rb.mass = berryMass;
@@ -60,7 +66,7 @@ public class Player : MonoBehaviour
             jumpSpeed = carrotJumpSpeed;
         }
 
-        // handles player jumping
+        // Handles player jumping
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
@@ -74,8 +80,26 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Called if the player collides with something
-    void OnCollisionEnter(Collision collision)
+    //  Called if the player collides with a trigger
+    void OnTriggerEnter(Collider collision)
+    {
+        // Checks if the player is colliding with a berry collectible
+        if (collision.gameObject.tag == "Berry" && isBerry)
+        {
+            Destroy(collision.gameObject);
+            berryCount += 1;
+        }
+
+        // Checks if the player is colliding with a carrot collectible
+        if (collision.gameObject.tag == "Carrot" && isCarrot)
+        {
+            Destroy(collision.gameObject);
+            carrotCount += 1;
+        }
+    }
+
+    // Called if the player is colliding with something
+    void OnCollisionStay(Collision collision)
     {
         // Checks if the player is colliding with the ground
         if (collision.gameObject.tag == "Ground" )

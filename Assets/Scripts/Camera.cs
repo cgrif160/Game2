@@ -17,10 +17,10 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // only follows the target if it exists
+        // Only follows the target if it exists
         if(target != null)
         {
-            // handles x position
+            // Handles x position
             if (target.position.x < leftLimit)
             {
                 xPos = leftLimit;
@@ -36,7 +36,7 @@ public class Camera : MonoBehaviour
                 xPos = target.position.x;
             }
 
-            // handles y position
+            // Handles y position
             if (target.position.y < bottomLimit)
             {
                 yPos = bottomLimit + cameraOffestY;
@@ -50,10 +50,10 @@ public class Camera : MonoBehaviour
                 yPos = target.position.y + cameraOffestY;
             }
 
-            // sets constamt z position
+            // Sets constamt z position
             zPos = transform.position.z;
 
-            // moves the camera to the correct position
+            // Moves the camera to the correct position
             transform.position = new Vector3(xPos, yPos, zPos);
         }
     }
