@@ -25,10 +25,12 @@ public class Camera : MonoBehaviour
             {
                 xPos = leftLimit;
             }
+            /*
             else if (target.position.x > rightLimit)
             {
                 xPos = rightLimit;
             }
+            */
             else
             {
                 xPos = target.position.x;

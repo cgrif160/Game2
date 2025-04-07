@@ -78,7 +78,14 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // Checks if the player is colliding with the ground
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" )
+        {
+            // Checks if colliding with the bottom of the collision
+            if (collision.contacts[0].normal.y == -1)
+            {
+                isGrounded = true;
+            }
+        }
         {
             // Checks if colliding with the top of the collision
             if (collision.contacts[0].normal.y == 1)
