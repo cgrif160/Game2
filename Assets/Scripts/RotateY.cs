@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Makes its object spin around
 public class RotateY : MonoBehaviour
 {
     // Update is called once per frame
