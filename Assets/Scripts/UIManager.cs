@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
-    public Text carrotsText;
-    public Text berriesText;
+    public TextMeshProUGUI carrotText;
+    public TextMeshProUGUI berryText;
 
     //Creates one instance of script
     public static UIManager Instance
@@ -25,13 +26,13 @@ public class UIManager : MonoBehaviour
     }
 
     //Updates UI
-    public void UpdateCarrotsText(int carrots)
+    public void UpdateCarrotsText(int carrotCount)
         {
-            carrotsText.text = "Carrots: " + carrots;
+            carrotText.text = "Carrots: " + carrotCount;
         }
-    public void UpdateBerriesText(int berries)
+    public void UpdateBerriesText(int berryCount)
         {
-            berriesText.text = "Berries: " + berries;
+            berryText.text = "Berries: " + berryCount;
         }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

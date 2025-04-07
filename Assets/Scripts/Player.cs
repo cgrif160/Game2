@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 // Handles the player's movement
 public class Player : MonoBehaviour
@@ -21,10 +22,15 @@ public class Player : MonoBehaviour
     private int berryCount = 0;
     private int carrotCount = 0;
 
+    UIManager UIManagerScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        UIManagerScript = GetComponent<UIManager>();
+        //carrotText = GetComponent<TextMeshProUGUI>();
+        //berryText = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -129,5 +135,19 @@ public class Player : MonoBehaviour
         transform.rotation = spawn.transform.rotation;
         rb.linearVelocity = new Vector3(0f, 0f, 0f);
         lives -= 1;
+    }
+
+    public void UpdateCarrotText(int carrotCount)
+    {
+        //CarrotText.text = "Carrots: " + carrotCount;
+        //carrotText.text = GameObject.Find("Carrots: " + carrotCount).GetComponent<TextMeshProUGUI>();
+        UIManagerScript.UpdateCarrotsText(carrotCount);
+    }
+
+    public void UpdateBerryText(int berryCount)
+    {
+        //BerryText.text = "Berries: " + berryCount;
+        //berryText.text = GameObject.Find("Berries: "  + berryCount).GetComponent<TextMeshProUGUI>();
+        UIManagerScript.UpdateBerriesText(berryCount);
     }
 }
