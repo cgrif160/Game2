@@ -38,6 +38,11 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(new Vector3(Input.GetAxis("Horizontal"), 0f, 0f));
             transform.Rotate(0f, 90f, 0f);
         }
+        // otherwise face forward
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(-1f, 0f, 0f));
+        }
 
         // allows the player to switch between characters
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -75,7 +80,7 @@ public class Player : MonoBehaviour
     }
 
     // Called if the player collides with something
-    void OnCollisionEnter(Collision collision)
+    void OnCollisionStay(Collision collision)
     {
         // Checks if the player is colliding with the ground
         if (collision.gameObject.tag == "Ground")
