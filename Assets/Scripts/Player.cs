@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     private float jumpSpeed;
     private bool isBerry = false;
     private bool isCarrot = true;
+    private int berryCount = 0;
+    private int carrotCount = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,22 +30,22 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // moves the player left or right
+        // Moves the player left or right
         rb.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
 
-        //rotates the player when changing direction
+        // Rotates the player when changing direction
         if (Input.GetAxis("Horizontal") != 0)
         {
             transform.rotation = Quaternion.LookRotation(new Vector3(Input.GetAxis("Horizontal"), 0f, 0f));
             transform.Rotate(0f, 90f, 0f);
         }
-        // otherwise face forward
+        // Otherwise face forward
         else
         {
             transform.rotation = Quaternion.LookRotation(new Vector3(-1f, 0f, 0f));
         }
 
-        // allows the player to switch between characters
+        // Allows the player to switch between characters
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             isBerry = !isBerry;
@@ -52,7 +54,7 @@ public class Player : MonoBehaviour
             carrot.SetActive(isCarrot);
         }
 
-        // adjusts the player's variables based on the character
+        // Adjusts the player's variables based on the character
         if (isBerry)
         {
             rb.mass = berryMass;
@@ -64,7 +66,7 @@ public class Player : MonoBehaviour
             jumpSpeed = carrotJumpSpeed;
         }
 
-        // handles player jumping
+        // Handles player jumping
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
@@ -85,12 +87,14 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Berry" && isBerry)
         {
             Destroy(collision.gameObject);
+            berryCount += 1;
         }
 
         // Checks if the player is colliding with a carrot collectible
         if (collision.gameObject.tag == "Carrot" && isCarrot)
         {
             Destroy(collision.gameObject);
+            carrotCount += 1;
         }
     }
 
