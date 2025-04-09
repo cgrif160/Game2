@@ -175,6 +175,8 @@ MonoBehaviour:
   carrotMass: 1
   berryJumpSpeed: 500
   carrotJumpSpeed: 7
+  carrotText: {fileID: 1741804035}
+  berryText: {fileID: 1334550696}
 --- !u!54 &253327528
 Rigidbody:
   m_ObjectHideFlags: 0

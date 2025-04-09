@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 // Handles the player's movement
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour
     public float carrotMass;
     public float berryJumpSpeed;
     public float carrotJumpSpeed;
+    public TextMeshProUGUI carrotText;
+    public TextMeshProUGUI berryText;
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -22,13 +25,13 @@ public class Player : MonoBehaviour
     private int berryCount = 0;
     private int carrotCount = 0;
 
-    UIManager UIManagerScript;
+    //UIManager UIManagerScript;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        UIManagerScript = GetComponent<UIManager>();
+        //UIManagerScript = GetComponent<UIManager>();
         //carrotText = GetComponent<TextMeshProUGUI>();
         //berryText = GetComponent<TextMeshProUGUI>();
     }
@@ -94,6 +97,7 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             berryCount += 1;
+            UpdateBerriesText(berryCount);
         }
 
         // Checks if the player is colliding with a carrot collectible
@@ -101,6 +105,7 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             carrotCount += 1;
+            UpdateCarrotsText(carrotCount);
         }
     }
 
@@ -137,17 +142,20 @@ public class Player : MonoBehaviour
         lives -= 1;
     }
 
-    public void UpdateCarrotText(int carrotCount)
+    public void UpdateCarrotsText(int carrotCount)
     {
-        //CarrotText.text = "Carrots: " + carrotCount;
+        carrotText.text = "Carrots: " + carrotCount;
         //carrotText.text = GameObject.Find("Carrots: " + carrotCount).GetComponent<TextMeshProUGUI>();
-        UIManagerScript.UpdateCarrotsText(carrotCount);
+        //UIManagerScript.UpdateCarrotsText(carrotCount);
+        //UIManager.UpdateCarrotsText("Carrots: " + carrotCount);
     }
 
-    public void UpdateBerryText(int berryCount)
+    public void UpdateBerriesText(int berryCount)
     {
-        //BerryText.text = "Berries: " + berryCount;
+        berryText.text = "Berries: " + berryCount;
         //berryText.text = GameObject.Find("Berries: "  + berryCount).GetComponent<TextMeshProUGUI>();
-        UIManagerScript.UpdateBerriesText(berryCount);
+        //UIManagerScript.UpdateBerriesText(berryCount);
+        //UIManager.UpdateBerriesText("Berries: " + berryCount);
     }
+
 }
