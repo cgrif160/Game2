@@ -17,12 +17,12 @@ public class Spring : MonoBehaviour
     void Update()
     {
         // Prevents the top of the spring from phasing into the bottom
-        if (top.transform.position.y < -0.18f)
+        if (top.transform.position.y < transform.position.y -0.125f)
         {
-            top.transform.position = new Vector3(top.transform.position.x, -0.18f, top.transform.position.z);
+            top.transform.position = new Vector3(top.transform.position.x, transform.position.y -0.125f, top.transform.position.z);
         }
 
-        if (top.transform.position.y < -0.1f)
+        if (top.transform.position.y < transform.position.y + 0.2f)
         {
             top.GetComponent<MeshRenderer>().material = orange;
         }
