@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Handles the player's movement
-public class Player : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
     public GameObject spawn;
     public GameObject berry;

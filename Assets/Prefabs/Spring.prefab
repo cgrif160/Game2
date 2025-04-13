@@ -194,13 +194,13 @@ SpringJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8962197320309674336}
   serializedVersion: 3
-  m_ConnectedBody: {fileID: 5204805180044923437}
+  m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_Spring: 1000
+  m_Spring: 1500
   m_Damper: 1
   m_MinDistance: 0
   m_MaxDistance: 0
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 5687187980505910653}
   - component: {fileID: 5657669852980201241}
   - component: {fileID: 6525008215451042991}
-  - component: {fileID: 5204805180044923437}
+  - component: {fileID: 162775111219280381}
   m_Layer: 0
   m_Name: Bottom
   m_TagString: Untagged
@@ -320,7 +320,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &5204805180044923437
+--- !u!54 &162775111219280381
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

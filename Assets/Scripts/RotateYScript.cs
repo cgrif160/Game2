@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Makes its object spin around
-public class RotateY : MonoBehaviour
+public class RotateYScript : MonoBehaviour
 {
     // Update is called once per frame
     void Update()

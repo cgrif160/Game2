@@ -1451,11 +1451,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2583505432748274509, guid: b399d0df5a1d13c4f99ddf65a0087772, type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3469889439979666490, guid: b399d0df5a1d13c4f99ddf65a0087772, type: 3}
       propertyPath: m_Name
       value: Spring
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5204805180044923437, guid: b399d0df5a1d13c4f99ddf65a0087772, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Moves the camera with the specified target within the specified limits
-public class Camera : MonoBehaviour
+public class CameraScript : MonoBehaviour
 {
     public Transform target;
     public float cameraOffestY;

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Changes the color of the spring when its interacted with
-public class Spring : MonoBehaviour
+public class SpringScript : MonoBehaviour
 {
     public GameObject top;
     public Material purple;
