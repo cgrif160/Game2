@@ -4,31 +4,37 @@ using UnityEngine;
 public class SpringScript : MonoBehaviour
 {
     public GameObject top;
+    public GameObject spring;
     public Material purple;
     public Material orange;
+    private Material topColor;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        top.GetComponent<MeshRenderer>().material = purple;
+        topColor = top.GetComponent<MeshRenderer>().material;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Prevents the top of the spring from phasing into the bottom
-        if (top.transform.position.y < transform.position.y -0.125f)
+        if (top.transform.localPosition.y < -0.125f)
         {
-            top.transform.position = new Vector3(top.transform.position.x, transform.position.y -0.125f, top.transform.position.z);
+            top.transform.localPosition = new Vector3(top.transform.localPosition.x, -0.125f, top.transform.localPosition.z);
         }
 
-        if (top.transform.position.y < transform.position.y + 0.2f)
+        // Changes the color of the top of the spring depending on how much it's being pressed down
+        if (top.transform.localPosition.y < 0.2f)
         {
-            top.GetComponent<MeshRenderer>().material = orange;
+            topColor = orange;
         }
         else
         {
-            top.GetComponent<MeshRenderer>().material = purple;
+            topColor = purple;
         }
+
+        // Squeezes the spring quad when the spring is being pressed down
+        spring.transform.localScale = new Vector3(spring.transform.localScale.x, ((top.transform.localPosition.y + 0.125f) * 2), spring.transform.localScale.z);
     }
 }
