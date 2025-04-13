@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 // Handles the player's movement
 public class PlayerScript : MonoBehaviour
@@ -12,14 +13,16 @@ public class PlayerScript : MonoBehaviour
     public float carrotMass;
     public float berryJumpSpeed;
     public float carrotJumpSpeed;
+    public TextMeshProUGUI berriesText;
+    public TextMeshProUGUI carrotsText;
 
     private Rigidbody rb;
     private bool isGrounded;
     private float jumpSpeed;
     private bool isBerry = false;
     private bool isCarrot = true;
-    private int berryCount = 0;
-    private int carrotCount = 0;
+    private int berriesCount = 0;
+    private int carrotsCount = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -87,14 +90,16 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.tag == "Berry" && isBerry)
         {
             Destroy(collision.gameObject);
-            berryCount += 1;
+            berriesCount += 1;
+            berriesText.text = "Berries: " + berriesCount;
         }
 
         // Checks if the player is colliding with a carrot collectible
         if (collision.gameObject.tag == "Carrot" && isCarrot)
         {
             Destroy(collision.gameObject);
-            carrotCount += 1;
+            carrotsCount += 1;
+            carrotsText.text = "Carrots: " + carrotsCount;
         }
     }
 
