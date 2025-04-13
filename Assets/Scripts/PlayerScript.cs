@@ -13,7 +13,9 @@ public class PlayerScript : MonoBehaviour
     public float carrotMass;
     public float berryJumpSpeed;
     public float carrotJumpSpeed;
+    public TextMeshProUGUI berriesBackgroundText;
     public TextMeshProUGUI berriesText;
+    public TextMeshProUGUI carrotsBackgroundText;
     public TextMeshProUGUI carrotsText;
 
     private Rigidbody rb;
@@ -91,7 +93,8 @@ public class PlayerScript : MonoBehaviour
         {
             Destroy(collision.gameObject);
             berriesCount += 1;
-            berriesText.text = "Berries: " + berriesCount;
+            berriesBackgroundText.text = "BERRIES: " + berriesCount;
+            berriesText.text = "BERRIES: " + berriesCount;
         }
 
         // Checks if the player is colliding with a carrot collectible
@@ -99,7 +102,8 @@ public class PlayerScript : MonoBehaviour
         {
             Destroy(collision.gameObject);
             carrotsCount += 1;
-            carrotsText.text = "Carrots: " + carrotsCount;
+            carrotsBackgroundText.text = "CARROTS: " + carrotsCount;
+            carrotsText.text = "CARROTS: " + carrotsCount;
         }
     }
 
