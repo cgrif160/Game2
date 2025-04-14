@@ -3,9 +3,9 @@ using UnityEngine;
 // Simple check for collisions
 public class HitboxScript : MonoBehaviour
 {
-    public bool isColliding;
+    public bool isColliding = false;
 
-    void OnTriggerStay(Collider collision)
+    void OnTriggerEnter(Collider collision)
     {
         isColliding = false;
     } 

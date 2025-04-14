@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject spawn;
     public GameObject berry;
     public GameObject carrot;
+    public GameObject hitbox;
     public int lives;
     public float movementSpeed;
     public float berryMass;
@@ -72,7 +73,8 @@ public class PlayerScript : MonoBehaviour
         // Allows the player to switch between characters if there is enough space
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (GameObject.Find("Hitbox").GetComponent<HitboxScript>().isColliding)
+            //!hitbox.GetComponent<HitboxScript>().isColliding
+            if (true)
             {
                 isBerry = !isBerry;
                 isCarrot = !isCarrot;
