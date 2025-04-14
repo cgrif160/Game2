@@ -78,11 +78,11 @@ public class PlayerScript : MonoBehaviour
                 isCarrot = !isCarrot;
                 berry.SetActive(isBerry);
                 carrot.SetActive(isCarrot);
-                switchSound.Play();
+                //switchSound.Play();
             }
             else
             {
-                failSound.Play();
+                //failSound.Play();
             }
         }
 

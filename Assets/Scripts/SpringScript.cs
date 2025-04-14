@@ -36,6 +36,7 @@ public class SpringScript : MonoBehaviour
         }
 
         // Squeezes the spring quad when the spring is being pressed down
-        spring.transform.localScale = new Vector3(spring.transform.localScale.x, ((top.transform.localPosition.y + 0.125f) * 2), spring.transform.localScale.z);
+        spring.transform.localScale = new Vector3(spring.transform.localScale.x, top.transform.localPosition.y + 0.125f, spring.transform.localScale.z);
+        spring.transform.localPosition = new Vector3(spring.transform.localPosition.x, (top.transform.localPosition.y - 0.375f) / 2, spring.transform.localPosition.z);
     }
 }
