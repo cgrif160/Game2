@@ -8,12 +8,12 @@ public class SpringScript : MonoBehaviour
     public Material purple;
     public Material orange;
 
-    private Material topColor;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        topColor = top.GetComponent<MeshRenderer>().material;
+        top.GetComponent<MeshRenderer>().material = purple;
     }
 
     // Update is called once per frame
@@ -28,11 +28,11 @@ public class SpringScript : MonoBehaviour
         // Changes the color of the top of the spring depending on how much it's being pressed down
         if (top.transform.localPosition.y < 0.2f)
         {
-            topColor = orange;
+            top.GetComponent<MeshRenderer>().material = orange;
         }
         else
         {
-            topColor = purple;
+            top.GetComponent<MeshRenderer>().material = purple;
         }
 
         // Squeezes the spring quad when the spring is being pressed down
