@@ -26,6 +26,10 @@ public class PlayerScript : MonoBehaviour
     private int berriesCount = 0;
     private int carrotsCount = 0;
 
+    public Animator carrotanim;
+    public Animator berryanim;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +39,21 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        float speed = rb.linearVelocity.magnitude; 
+
+        if(isBerry)
+        {
+            berryanim.SetBool("isWalking", speed > 1);
+            berryanim.SetBool("isJumping", !isGrounded);
+        }
+        else if(isCarrot)
+        {
+            carrotanim.SetBool("isWalking", speed > 1);
+            carrotanim.SetBool("isJumping", !isGrounded);
+
+        }
+
         // Moves the player left or right
         rb.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
 
@@ -83,6 +102,7 @@ public class PlayerScript : MonoBehaviour
         {
             Respawn();
         }
+
     }
 
     //  Called if the player collides with a trigger
