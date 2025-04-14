@@ -17,17 +17,18 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI berriesText;
     public TextMeshProUGUI carrotsBackgroundText;
     public TextMeshProUGUI carrotsText;
+    public Animator berryAnimator;
+    public Animator carrotAnimator;
 
     private Rigidbody rb;
     private bool isGrounded;
+    private bool isWalking;
+    private bool canJump;
     private float jumpSpeed;
     private bool isBerry = false;
     private bool isCarrot = true;
     private int berriesCount = 0;
     private int carrotsCount = 0;
-
-    public Animator carrotanim;
-    public Animator berryanim;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,20 +40,9 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isGrounded + ", " + canJump);
 
         float speed = rb.linearVelocity.magnitude; 
-
-        if(isBerry)
-        {
-            berryanim.SetBool("isWalking", speed > 1);
-            berryanim.SetBool("isJumping", !isGrounded);
-        }
-        else if(isCarrot)
-        {
-            carrotanim.SetBool("isWalking", speed > 1);
-            carrotanim.SetBool("isJumping", !isGrounded);
-
-        }
 
         // Moves the player left or right
         rb.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
@@ -62,11 +52,22 @@ public class PlayerScript : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(new Vector3(Input.GetAxis("Horizontal"), 0f, 0f));
             transform.Rotate(0f, 90f, 0f);
+
+            // Checks if the player is walking on the ground or not
+            if (isGrounded)
+            {
+                isWalking = true;
+            }
+            else
+            {
+                isWalking = false;
+            }
         }
         // Otherwise face forward
         else
         {
             transform.rotation = Quaternion.LookRotation(new Vector3(-1f, 0f, 0f));
+            isWalking = false;
         }
 
         // Allows the player to switch between characters
@@ -78,23 +79,27 @@ public class PlayerScript : MonoBehaviour
             carrot.SetActive(isCarrot);
         }
 
-        // Adjusts the player's variables based on the character
+        // Adjusts the player's variables and animations based on the character
         if (isBerry)
         {
             rb.mass = berryMass;
             jumpSpeed = berryJumpSpeed;
+            berryAnimator.SetBool("isWalking", isWalking);
+            berryAnimator.SetBool("isJumping", !isGrounded);
         }
         else if (isCarrot)
         {
             rb.mass = carrotMass;
             jumpSpeed = carrotJumpSpeed;
+            carrotAnimator.SetBool("isWalking", isWalking);
+            carrotAnimator.SetBool("isJumping", !isGrounded);
         }
 
         // Handles player jumping
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && canJump)
         {
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
-            isGrounded = false;
+            canJump = false;
         }
 
         // Respawns the player if they fall below the level
@@ -102,7 +107,6 @@ public class PlayerScript : MonoBehaviour
         {
             Respawn();
         }
-
     }
 
     //  Called if the player collides with a trigger
@@ -130,13 +134,15 @@ public class PlayerScript : MonoBehaviour
     // Called if the player is colliding with something
     void OnCollisionStay(Collision collision)
     {
-        // Checks if the player is colliding with the ground
-        if (collision.gameObject.tag == "Ground")
+        // Checks if colliding with the top of the collision
+        if (collision.contacts[0].normal.y == 1)
         {
-            // Checks if colliding with the top of the collision
-            if (collision.contacts[0].normal.y == 1)
+            isGrounded = true;
+
+            // Checks if the player is colliding with the ground
+            if (collision.gameObject.tag == "Ground")
             {
-                isGrounded = true;
+                canJump = true;
             }
         }
     }
@@ -144,10 +150,12 @@ public class PlayerScript : MonoBehaviour
     // Called when the player leaves a collision
     void OnCollisionExit(Collision collision)
     {
+        isGrounded = false;
+
         // Prevents the player from jumping in the air after falling off of a platform
         if (collision.gameObject.tag == "Ground")
         {
-            isGrounded = false;
+            canJump = false;
         }
     }
 

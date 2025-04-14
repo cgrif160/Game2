@@ -135,7 +135,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!114 &239369491745634250
 MonoBehaviour:
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destinationX: 0
+  spawn: {x: 0, y: 0, z: 0}
   block: {fileID: 2902128775153319099}
   purple: {fileID: 2100000, guid: 54a54fc048097f142a91fb3cd80072d5, type: 2}
   orange: {fileID: 2100000, guid: af4f5d6eb65c2124a87c5df366bffd86, type: 2}
