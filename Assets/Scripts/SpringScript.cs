@@ -1,12 +1,13 @@
 using UnityEngine;
 
-// Changes the color of the spring when its interacted with
+// Makes sure the spring still looks good when it's being used
 public class SpringScript : MonoBehaviour
 {
     public GameObject top;
     public GameObject spring;
     public Material purple;
     public Material orange;
+
     private Material topColor;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
