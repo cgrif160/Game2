@@ -19,6 +19,8 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI carrotsText;
     public Animator berryAnimator;
     public Animator carrotAnimator;
+    public AudioSource switchSound;
+    public AudioSource failSound;
 
     private Rigidbody rb;
     private bool isGrounded;
@@ -30,19 +32,16 @@ public class PlayerScript : MonoBehaviour
     private int berriesCount = 0;
     private int carrotsCount = 0;
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-    }
+}
 
     // Update is called once per frame
     void Update()
     {
         Debug.Log(isGrounded + ", " + canJump);
-
-        float speed = rb.linearVelocity.magnitude; 
 
         // Moves the player left or right
         rb.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
@@ -70,13 +69,21 @@ public class PlayerScript : MonoBehaviour
             isWalking = false;
         }
 
-        // Allows the player to switch between characters
+        // Allows the player to switch between characters if there is enough space
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            isBerry = !isBerry;
-            isCarrot = !isCarrot;
-            berry.SetActive(isBerry);
-            carrot.SetActive(isCarrot);
+            if (GameObject.Find("Hitbox").GetComponent<HitboxScript>().isColliding)
+            {
+                isBerry = !isBerry;
+                isCarrot = !isCarrot;
+                berry.SetActive(isBerry);
+                carrot.SetActive(isCarrot);
+                switchSound.Play();
+            }
+            else
+            {
+                failSound.Play();
+            }
         }
 
         // Adjusts the player's variables and animations based on the character
