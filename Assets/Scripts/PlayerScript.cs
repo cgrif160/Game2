@@ -26,6 +26,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded;
     private bool isWalking;
+    private bool isJumping;
     private bool canJump;
     private float jumpSpeed;
     private bool isBerry = false;
@@ -68,6 +69,15 @@ public class PlayerScript : MonoBehaviour
             isWalking = false;
         }
 
+        if (isGrounded)
+        {
+            isJumping = false;
+        }
+        else
+        {
+            isJumping = true;
+        }
+
         // Allows the player to switch between characters if there is enough space
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -92,14 +102,14 @@ public class PlayerScript : MonoBehaviour
             rb.mass = berryMass;
             jumpSpeed = berryJumpSpeed;
             berryAnimator.SetBool("isWalking", isWalking);
-            berryAnimator.SetBool("isJumping", !isGrounded);
+            berryAnimator.SetBool("isJumping", isJumping);
         }
         else if (isCarrot)
         {
             rb.mass = carrotMass;
             jumpSpeed = carrotJumpSpeed;
             carrotAnimator.SetBool("isWalking", isWalking);
-            carrotAnimator.SetBool("isJumping", !isGrounded);
+            carrotAnimator.SetBool("isJumping", isJumping);
         }
 
         // Handles player jumping
