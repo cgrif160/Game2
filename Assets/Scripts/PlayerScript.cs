@@ -37,7 +37,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-}
+    }
 
     // Update is called once per frame
     void Update()
