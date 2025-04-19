@@ -7,6 +7,7 @@ public class SpringScript : MonoBehaviour
     public GameObject spring;
     public Material purple;
     public Material orange;
+    public float changeColorY;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,7 +25,7 @@ public class SpringScript : MonoBehaviour
         }
 
         // Changes the color of the top of the spring depending on how much it's being pressed down
-        if (top.transform.localPosition.y < 0.2f)
+        if (top.transform.localPosition.y < changeColorY)
         {
             top.GetComponent<MeshRenderer>().material = orange;
         }

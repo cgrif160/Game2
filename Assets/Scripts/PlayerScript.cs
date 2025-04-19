@@ -21,7 +21,7 @@ public class PlayerScript : MonoBehaviour
     public Animator berryAnimator;
     public Animator carrotAnimator;
     public AudioSource switchSound;
-    public AudioSource switchFailSound;
+    public AudioSource switchFailSound; 
 
     private Rigidbody rb;
     private float movementInput;

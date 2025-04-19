@@ -51,6 +51,7 @@ MonoBehaviour:
   spring: {fileID: 9136922297433751522}
   purple: {fileID: 2100000, guid: 54a54fc048097f142a91fb3cd80072d5, type: 2}
   orange: {fileID: 2100000, guid: af4f5d6eb65c2124a87c5df366bffd86, type: 2}
+  changeColorY: 0.2
 --- !u!1 &8962197320309674336
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +197,7 @@ SpringJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8962197320309674336}
   serializedVersion: 3
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 162775111219280381}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}

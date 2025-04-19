@@ -7,11 +7,17 @@ public class HitboxScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        isColliding = true;
+        if (collision.gameObject.tag != "Berry" && collision.gameObject.tag != "Carrot")
+        {
+            isColliding = true;
+        }
     } 
 
     private void OnTriggerExit(Collider collision)
     {
-        isColliding = false;
+        if (collision.gameObject.tag != "Berry" && collision.gameObject.tag != "Carrot")
+        {
+            isColliding = false;
+        }
     }
 }

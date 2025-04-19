@@ -5,14 +5,16 @@ public class BlockScript : MonoBehaviour
 {
     public float destinationX;
     public Vector3 spawn;
-    public GameObject block;
     public Material purple;
     public Material orange;
+
+    private Rigidbody rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        block.GetComponent<MeshRenderer>().material = purple;
+        rb = GetComponent<Rigidbody>();
+        GetComponent<MeshRenderer>().material = purple;
     }
 
     // Update is called once per frame
@@ -21,17 +23,18 @@ public class BlockScript : MonoBehaviour
         // Changes the color of the block depeneding on its x position
         if (transform.position.x >= destinationX)
         {
-            block.GetComponent<MeshRenderer>().material = orange;
+            GetComponent<MeshRenderer>().material = orange;
         }
         else
         {
-            block.GetComponent<MeshRenderer>().material = purple;
+            GetComponent<MeshRenderer>().material = purple;
         }
 
         // Respawwns the block if it falls beelow the level
         if (transform.position.y < -10)
         {
             transform.position = spawn;
+            rb.linearVelocity = new Vector3(0f, 0f, 0f);
         }
     }
 }
