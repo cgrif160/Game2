@@ -43,6 +43,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isWalking + "" + isJumping);
         // Moves the player left or right
         rb.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
 
@@ -51,16 +52,7 @@ public class PlayerScript : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(new Vector3(Input.GetAxis("Horizontal"), 0f, 0f));
             transform.Rotate(0f, 90f, 0f);
-
-            // Checks if the player is walking on the ground or not
-            if (isGrounded)
-            {
-                isWalking = true;
-            }
-            else
-            {
-                isWalking = false;
-            }
+            isWalking = true;
         }
         // Otherwise face forward
         else
