@@ -21,7 +21,7 @@ public class PlayerScript : MonoBehaviour
     public Animator berryAnimator;
     public Animator carrotAnimator;
     public AudioSource switchSound;
-    public AudioSource failSound;
+    public AudioSource switchFailSound;
 
     private Rigidbody rb;
     private float movementInput;
@@ -76,8 +76,7 @@ public class PlayerScript : MonoBehaviour
         // Allows the player to switch between characters if there is enough space
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            //!hitbox.GetComponent<HitboxScript>().isColliding
-            if (true)
+            if (!hitbox.GetComponent<HitboxScript>().isColliding)
             {
                 isBerry = !isBerry;
                 isCarrot = !isCarrot;
@@ -87,7 +86,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                //failSound.Play();
+                //switchFailSound.Play();
             }
         }
 

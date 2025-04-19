@@ -7,11 +7,11 @@ public class HitboxScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        isColliding = false;
+        isColliding = true;
     } 
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider collision)
     {
-        isColliding = true;
+        isColliding = false;
     }
 }
