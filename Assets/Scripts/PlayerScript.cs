@@ -24,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     public AudioSource failSound;
 
     private Rigidbody rb;
+    private float movementInput;
     private bool isGrounded;
     private bool isWalking;
     private bool isJumping;
@@ -43,14 +44,16 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isWalking + "" + isJumping);
+        // Stores if the player is moving or not
+        movementInput = Input.GetAxis("Horizontal");
+
         // Moves the player left or right
-        rb.linearVelocity = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
+        rb.linearVelocity = new Vector3(movementInput * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
 
         // Rotates the player when changing direction
-        if (Input.GetAxis("Horizontal") != 0)
+        if (movementInput != 0)
         {
-            transform.rotation = Quaternion.LookRotation(new Vector3(Input.GetAxis("Horizontal"), 0f, 0f));
+            transform.rotation = Quaternion.LookRotation(new Vector3(movementInput, 0f, 0f));
             transform.Rotate(0f, 90f, 0f);
             isWalking = true;
         }
