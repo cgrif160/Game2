@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6988821576819971970}
   - component: {fileID: 9016335740212777241}
   - component: {fileID: 4700892226533207984}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BerryCollectible
   m_TagString: Berry
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 6063972813103231801}
   - component: {fileID: 7172075523268148380}
   - component: {fileID: 4930495984065775702}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Berry_collectible
   m_TagString: Untagged
   m_Icon: {fileID: 0}

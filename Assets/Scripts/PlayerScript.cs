@@ -5,7 +5,7 @@ using TMPro;
 // Handles the player's movement and interactions
 public class PlayerScript : MonoBehaviour
 {
-    public List<Transform> checkpoints = new List<Transform>();
+    public List<GameObject> checkpoints = new List<GameObject>();
     public GameObject berry;
     public GameObject carrot;
     public GameObject hitbox;
@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour
     private bool isCarrot = true;
     private int berriesCount = 0;
     private int carrotsCount = 0;
-    private Transform currentCheckpoint;
+    private GameObject currentCheckpoint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -75,6 +75,7 @@ public class PlayerScript : MonoBehaviour
             isJumping = true;
         }
 
+        Debug.Log(hitbox.GetComponent<HitboxScript>().isColliding);
         // Allows the player to switch between characters if there is enough space
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -112,22 +113,28 @@ public class PlayerScript : MonoBehaviour
             canJump = false;
         }
 
-        // Unlocks the next checkpoint when the player passes it
-        if (transform.position.x > checkpoints[1].transform.position.x)
-        {
-            currentCheckpoint = checkpoints[1];
-        }
-
         // Respawns the player if they fall below the level
         if (transform.position.y < -10)
         {
             Respawn();
+        }
+
+        // Goes to the next scene when the player reaches the last checkpoint
+        if (currentCheckpoint == checkpoints[checkpoints.Count - 1])
+        {
+            Debug.Log("HI");
         }
     }
 
     //  Called if the player collides with a trigger
     void OnTriggerEnter(Collider collision)
     {
+        // If a player collides with a checkpoint, make that the current checkpoint
+        if (collision.gameObject.tag == "Checkpoint")
+        {
+            currentCheckpoint = collision.gameObject;
+        }
+
         // Checks if the player is colliding with a berry collectible
         if (collision.gameObject.tag == "Berry" && isBerry)
         {
@@ -187,8 +194,8 @@ public class PlayerScript : MonoBehaviour
     // Moves the player to the spawn point and removes one of the player's lives
     public void Respawn()
     {
-        transform.position = currentCheckpoint.position;
-        transform.rotation = currentCheckpoint.rotation;
+        transform.position = currentCheckpoint.transform.position;
+        transform.rotation = currentCheckpoint.transform.rotation;
         rb.linearVelocity = new Vector3(0f, 0f, 0f);
 
         if (isBerry)

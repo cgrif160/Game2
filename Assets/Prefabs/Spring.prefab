@@ -51,6 +51,8 @@ MonoBehaviour:
   spring: {fileID: 9136922297433751522}
   purple: {fileID: 2100000, guid: 54a54fc048097f142a91fb3cd80072d5, type: 2}
   orange: {fileID: 2100000, guid: af4f5d6eb65c2124a87c5df366bffd86, type: 2}
+  topLimit: 1
+  bottomLimit: -0.125
   changeColorY: 0.2
 --- !u!1 &8962197320309674336
 GameObject:
