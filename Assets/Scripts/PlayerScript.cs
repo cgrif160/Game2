@@ -1,14 +1,14 @@
 using UnityEngine;
+using System.Collections.Generic;
 using TMPro;
 
-// Handles the player's movement
+// Handles the player's movement and interactions
 public class PlayerScript : MonoBehaviour
 {
-    public GameObject spawn;
+    public List<Transform> checkpoints = new List<Transform>();
     public GameObject berry;
     public GameObject carrot;
     public GameObject hitbox;
-    public int lives;
     public float movementSpeed;
     public float berryMass;
     public float carrotMass;
@@ -34,11 +34,13 @@ public class PlayerScript : MonoBehaviour
     private bool isCarrot = true;
     private int berriesCount = 0;
     private int carrotsCount = 0;
+    private Transform currentCheckpoint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        currentCheckpoint = checkpoints[0];
     }
 
     // Update is called once per frame
@@ -78,10 +80,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (!hitbox.GetComponent<HitboxScript>().isColliding)
             {
-                isBerry = !isBerry;
-                isCarrot = !isCarrot;
-                berry.SetActive(isBerry);
-                carrot.SetActive(isCarrot);
+                Switch();
                 //switchSound.Play();
             }
             else
@@ -111,6 +110,12 @@ public class PlayerScript : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
             canJump = false;
+        }
+
+        // Unlocks the next checkpoint when the player passes it
+        if (transform.position.x > checkpoints[1].transform.position.x)
+        {
+            currentCheckpoint = checkpoints[1];
         }
 
         // Respawns the player if they fall below the level
@@ -170,12 +175,25 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    // Switches the character
+    public void Switch()
+    {
+        isBerry = !isBerry;
+        isCarrot = !isCarrot;
+        berry.SetActive(isBerry);
+        carrot.SetActive(isCarrot);
+    }
+
     // Moves the player to the spawn point and removes one of the player's lives
     public void Respawn()
     {
-        transform.position = spawn.transform.position;
-        transform.rotation = spawn.transform.rotation;
+        transform.position = currentCheckpoint.position;
+        transform.rotation = currentCheckpoint.rotation;
         rb.linearVelocity = new Vector3(0f, 0f, 0f);
-        lives -= 1;
+
+        if (isBerry)
+        {
+            Switch();
+        }
     }
 }
