@@ -222,6 +222,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    // Pauses the game
     public void Pause()
     {
         isPaused = true;
@@ -229,6 +230,7 @@ public class PlayerScript : MonoBehaviour
         pauseScreen.SetActive(true);
     }
 
+    // Unpauses the game
     public void Unpause()
     {
         isPaused = false;
@@ -236,23 +238,27 @@ public class PlayerScript : MonoBehaviour
         pauseScreen.SetActive(false);
     }
 
+    // Plays a sound for when a button is pressed
     public void ButtonPress()
     {
         //buttonPress.Play();
     }
 
+    // Displays the controls
     public void Controls()
     {
 
     }
 
+    // Goes back to the main menu
     public void MainMenu()
     {
-
+        SceneManager.LoadScene(0);
     }
 
+    // Quits the game
     public void Quit()
     {
-
+        Application.Quit();
     }
 }
