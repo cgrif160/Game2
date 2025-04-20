@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // Handles the player's movement and interactions
 public class PlayerScript : MonoBehaviour
@@ -9,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject berry;
     public GameObject carrot;
     public GameObject hitbox;
+    public GameObject pauseScreen;
     public float movementSpeed;
     public float berryMass;
     public float carrotMass;
@@ -30,6 +32,7 @@ public class PlayerScript : MonoBehaviour
     private bool isJumping;
     private bool canJump;
     private float jumpSpeed;
+    private bool isPaused = false;
     private bool isBerry = false;
     private bool isCarrot = true;
     private int berriesCount = 0;
@@ -75,7 +78,6 @@ public class PlayerScript : MonoBehaviour
             isJumping = true;
         }
 
-        Debug.Log(hitbox.GetComponent<HitboxScript>().isColliding);
         // Allows the player to switch between characters if there is enough space
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -119,10 +121,27 @@ public class PlayerScript : MonoBehaviour
             Respawn();
         }
 
+        // Allows the player to pause the game
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+        }
+
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+            pauseScreen.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pauseScreen.SetActive(false);
+        }
+
         // Goes to the next scene when the player reaches the last checkpoint
         if (currentCheckpoint == checkpoints[checkpoints.Count - 1])
         {
-            Debug.Log("HI");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
