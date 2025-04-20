@@ -23,7 +23,8 @@ public class PlayerScript : MonoBehaviour
     public Animator berryAnimator;
     public Animator carrotAnimator;
     public AudioSource switchSound;
-    public AudioSource switchFailSound; 
+    public AudioSource switchFailSound;
+    public AudioSource buttonPress;
 
     private Rigidbody rb;
     private float movementInput;
@@ -125,17 +126,15 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isPaused = !isPaused;
-        }
 
-        if (isPaused)
-        {
-            Time.timeScale = 0;
-            pauseScreen.SetActive(true);
-        }
-        else
-        {
-            Time.timeScale = 1;
-            pauseScreen.SetActive(false);
+            if (isPaused)
+            {
+                Pause();
+            }
+            else
+            {
+                Unpause();
+            }
         }
 
         // Goes to the next scene when the player reaches the last checkpoint
@@ -221,5 +220,39 @@ public class PlayerScript : MonoBehaviour
         {
             Switch();
         }
+    }
+
+    public void Pause()
+    {
+        isPaused = true;
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
+    }
+
+    public void Unpause()
+    {
+        isPaused = false;
+        Time.timeScale = 1;
+        pauseScreen.SetActive(false);
+    }
+
+    public void ButtonPress()
+    {
+        //buttonPress.Play();
+    }
+
+    public void Controls()
+    {
+
+    }
+
+    public void MainMenu()
+    {
+
+    }
+
+    public void Quit()
+    {
+
     }
 }
