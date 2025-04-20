@@ -48,7 +48,7 @@ public class CameraScript : MonoBehaviour
                 yPos = target.position.y + cameraOffestY;
             }
 
-            // Sets constamt z position
+            // Sets constant z position
             zPos = transform.position.z;
 
             // Moves the camera to the correct position
