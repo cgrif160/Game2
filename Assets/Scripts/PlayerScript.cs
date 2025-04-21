@@ -11,6 +11,11 @@ public class PlayerScript : MonoBehaviour
     public GameObject carrot;
     public GameObject hitbox;
     public GameObject pauseScreen;
+    public GameObject respawnButton;
+    public GameObject controlsButton;
+    public GameObject mainMenuButton;
+    public GameObject quitButton;
+    public GameObject controls;
     public float movementSpeed;
     public float berryMass;
     public float carrotMass;
@@ -34,6 +39,7 @@ public class PlayerScript : MonoBehaviour
     private bool canJump;
     private float jumpSpeed;
     private bool isPaused = false;
+    private bool isControls = false;
     private bool isBerry = false;
     private bool isCarrot = true;
     private int berriesCount = 0;
@@ -228,6 +234,10 @@ public class PlayerScript : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0;
         pauseScreen.SetActive(true);
+        respawnButton.SetActive(!isControls);
+        controlsButton.SetActive(!isControls);
+        mainMenuButton.SetActive(!isControls);
+        quitButton.SetActive(!isControls);
     }
 
     // Unpauses the game
