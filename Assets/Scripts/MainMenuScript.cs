@@ -8,6 +8,8 @@ public class MainMenuScript : MonoBehaviour
     public GameObject controls;
     public AudioSource buttonPress;
 
+    private bool isControls = false;
+
     // Update is called once per frame
     void Update()
     {

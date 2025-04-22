@@ -51,7 +51,7 @@ public class PlayerScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentCheckpoint = checkpoints[0];
-    }
+
         // Goes to the next scene when the player reaches the last checkpoint
         if (currentCheckpoint == checkpoints[checkpoints.Count - 1])
         {
