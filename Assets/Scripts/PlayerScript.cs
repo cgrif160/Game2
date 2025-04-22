@@ -59,6 +59,88 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        // Stores if the player is moving or not
+        movementInput = Input.GetAxis("Horizontal");
+
+        // Moves the player left or right
+        rb.linearVelocity = new Vector3(movementInput * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
+
+        // Rotates the player when changing direction
+        if (movementInput != 0)
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(movementInput, 0f, 0f));
+            transform.Rotate(0f, 90f, 0f);
+            isWalking = true;
+        }
+        // Otherwise face forward
+        else
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(-1f, 0f, 0f));
+            isWalking = false;
+        }
+
+        if (isGrounded)
+        {
+            isJumping = false;
+        }
+        else
+        {
+            isJumping = true;
+        }
+
+        // Allows the player to switch between characters if there is enough space
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (!hitbox.GetComponent<HitboxScript>().isColliding)
+            {
+                Switch();
+                //switchSound.Play();
+            }
+            else
+            {
+                //switchFailSound.Play();
+            }
+        }
+
+        // Adjusts the player's variables and animations based on the character
+        if (isBerry)
+        {
+            rb.mass = berryMass;
+            jumpSpeed = berryJumpSpeed;
+            berryAnimator.SetBool("isWalking", isWalking);
+            berryAnimator.SetBool("isJumping", isJumping);
+        }
+        else if (isCarrot)
+        {
+            rb.mass = carrotMass;
+            jumpSpeed = carrotJumpSpeed;
+            carrotAnimator.SetBool("isWalking", isWalking);
+            carrotAnimator.SetBool("isJumping", isJumping);
+        }
+
+        // Handles player jumping
+        if (Input.GetButtonDown("Jump") && canJump)
+        {
+            rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
+            canJump = false;
+        }
+
+        // Unlocks the next checkpoint when the player passes it
+        if (transform.position.x > checkpoints[1].transform.position.x)
+        {
+            currentCheckpoint = checkpoints[1];
+        }
+
+        // Respawns the player if they fall below the level
+        if (transform.position.y < -10)
+        {
+            Respawn();
+        }
+    }
+
     //  Called if the player collides with a trigger
     void OnTriggerEnter(Collider collision)
     {
