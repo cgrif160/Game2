@@ -51,12 +51,6 @@ public class PlayerScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentCheckpoint = checkpoints[0];
-
-        // Goes to the next scene when the player reaches the last checkpoint
-        if (currentCheckpoint == checkpoints[checkpoints.Count - 1])
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
     }
 
     // Update is called once per frame
@@ -138,6 +132,27 @@ public class PlayerScript : MonoBehaviour
         if (transform.position.y < -10)
         {
             Respawn();
+        }
+
+        // Allows the player to pause the game
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+
+            if (isPaused)
+            {
+                Pause();
+            }
+            else
+            {
+                Unpause();
+            }
+        }
+
+        // Goes to the next scene when the player reaches the last checkpoint
+        if (currentCheckpoint == checkpoints[checkpoints.Count - 1])
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
