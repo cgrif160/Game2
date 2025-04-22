@@ -35,7 +35,7 @@ public class MainMenuScript : MonoBehaviour
     // Displays the controls
     public void Controls()
     {
-        isControls = true;
+        isControls = !isControls;
         title.SetActive(!isControls);
         controls.SetActive(isControls);
     }
