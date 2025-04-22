@@ -52,97 +52,6 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentCheckpoint = checkpoints[0];
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Stores if the player is moving or not
-        movementInput = Input.GetAxis("Horizontal");
-
-        // Moves the player left or right
-        rb.linearVelocity = new Vector3(movementInput * movementSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
-
-        // Rotates the player when changing direction
-        if (movementInput != 0)
-        {
-            transform.rotation = Quaternion.LookRotation(new Vector3(movementInput, 0f, 0f));
-            transform.Rotate(0f, 90f, 0f);
-            isWalking = true;
-        }
-        // Otherwise face forward
-        else
-        {
-            transform.rotation = Quaternion.LookRotation(new Vector3(-1f, 0f, 0f));
-            isWalking = false;
-        }
-
-        if (isGrounded)
-        {
-            isJumping = false;
-        }
-        else
-        {
-            isJumping = true;
-        }
-
-        // Allows the player to switch between characters if there is enough space
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            if (!hitbox.GetComponent<HitboxScript>().isColliding)
-            {
-                Switch();
-                //switchSound.Play();
-            }
-            else
-            {
-                //switchFailSound.Play();
-            }
-        }
-
-        // Adjusts the player's variables and animations based on the character
-        if (isBerry)
-        {
-            rb.mass = berryMass;
-            jumpSpeed = berryJumpSpeed;
-            berryAnimator.SetBool("isWalking", isWalking);
-            berryAnimator.SetBool("isJumping", isJumping);
-        }
-        else if (isCarrot)
-        {
-            rb.mass = carrotMass;
-            jumpSpeed = carrotJumpSpeed;
-            carrotAnimator.SetBool("isWalking", isWalking);
-            carrotAnimator.SetBool("isJumping", isJumping);
-        }
-
-        // Handles player jumping
-        if (Input.GetButtonDown("Jump") && canJump)
-        {
-            rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
-            canJump = false;
-        }
-
-        // Respawns the player if they fall below the level
-        if (transform.position.y < -10)
-        {
-            Respawn();
-        }
-
-        // Allows the player to pause the game
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isPaused = !isPaused;
-
-            if (isPaused)
-            {
-                Pause();
-            }
-            else
-            {
-                Unpause();
-            }
-        }
-
         // Goes to the next scene when the player reaches the last checkpoint
         if (currentCheckpoint == checkpoints[checkpoints.Count - 1])
         {
@@ -232,12 +141,14 @@ public class PlayerScript : MonoBehaviour
     public void Pause()
     {
         isPaused = true;
+        isControls = false;
         Time.timeScale = 0;
         pauseScreen.SetActive(true);
         respawnButton.SetActive(!isControls);
         controlsButton.SetActive(!isControls);
         mainMenuButton.SetActive(!isControls);
         quitButton.SetActive(!isControls);
+        controls.SetActive(isControls);
     }
 
     // Unpauses the game
@@ -257,7 +168,23 @@ public class PlayerScript : MonoBehaviour
     // Displays the controls
     public void Controls()
     {
+        isControls = true;
+        respawnButton.SetActive(!isControls);
+        controlsButton.SetActive(!isControls);
+        mainMenuButton.SetActive(!isControls);
+        quitButton.SetActive(!isControls);
+        controls.SetActive(isControls);
+    }
 
+    // Goes back to the pause screen
+    public void Back()
+    {
+        isControls = false;
+        respawnButton.SetActive(!isControls);
+        controlsButton.SetActive(!isControls);
+        mainMenuButton.SetActive(!isControls);
+        quitButton.SetActive(!isControls);
+        controls.SetActive(isControls);
     }
 
     // Goes back to the main menu
