@@ -56,6 +56,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Debug.Log(currentCheckpoint.ToString());
         // Stores if the player is moving or not
         movementInput = Input.GetAxis("Horizontal");
 
@@ -122,12 +123,6 @@ public class PlayerScript : MonoBehaviour
             canJump = false;
         }
 
-        // Unlocks the next checkpoint when the player passes it
-        if (transform.position.x > checkpoints[1].transform.position.x)
-        {
-            currentCheckpoint = checkpoints[1];
-        }
-
         // Respawns the player if they fall below the level
         if (transform.position.y < -10)
         {
@@ -157,27 +152,27 @@ public class PlayerScript : MonoBehaviour
     }
 
     //  Called if the player collides with a trigger
-    void OnTriggerEnter(Collider collision)
+    void OnTriggerEnter(Collider collider)
     {
         // If a player collides with a checkpoint, make that the current checkpoint
-        if (collision.gameObject.tag == "Checkpoint")
+        if (collider.gameObject.tag == "Checkpoint")
         {
-            currentCheckpoint = collision.gameObject;
+            currentCheckpoint = collider.gameObject;
         }
 
         // Checks if the player is colliding with a berry collectible
-        if (collision.gameObject.tag == "Berry" && isBerry)
+        if (collider.gameObject.tag == "Berry" && isBerry)
         {
-            Destroy(collision.gameObject);
+            Destroy(collider.gameObject);
             berriesCount += 1;
             berriesBackgroundText.text = "BERRIES: " + berriesCount;
             berriesText.text = "BERRIES: " + berriesCount;
         }
 
         // Checks if the player is colliding with a carrot collectible
-        if (collision.gameObject.tag == "Carrot" && isCarrot)
+        if (collider.gameObject.tag == "Carrot" && isCarrot)
         {
-            Destroy(collision.gameObject);
+            Destroy(collider.gameObject);
             carrotsCount += 1;
             carrotsBackgroundText.text = "CARROTS: " + carrotsCount;
             carrotsText.text = "CARROTS: " + carrotsCount;
