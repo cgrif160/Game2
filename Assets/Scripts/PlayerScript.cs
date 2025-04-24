@@ -56,7 +56,6 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentCheckpoint.ToString());
         // Stores if the player is moving or not
         movementInput = Input.GetAxis("Horizontal");
 
@@ -219,9 +218,9 @@ public class PlayerScript : MonoBehaviour
     // Moves the player to the spawn point and removes one of the player's lives
     public void Respawn()
     {
+        rb.linearVelocity = new Vector3(0f, 0f, 0f);
         transform.position = currentCheckpoint.transform.position;
         transform.rotation = currentCheckpoint.transform.rotation;
-        rb.linearVelocity = new Vector3(0f, 0f, 0f);
 
         if (isBerry)
         {
