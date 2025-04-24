@@ -56,7 +56,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(currentCheckpoint.ToString());
+        Debug.Log(currentCheckpoint.ToString());
         // Stores if the player is moving or not
         movementInput = Input.GetAxis("Horizontal");
 
