@@ -10,8 +10,10 @@ public class SpringScript : MonoBehaviour
     public float topLimit;
     public float bottomLimit;
     public float changeColorY;
+    public AudioSource springSound;
 
     private Rigidbody rb;
+    private bool canPlaySound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,10 +41,16 @@ public class SpringScript : MonoBehaviour
         if (top.transform.localPosition.y < changeColorY)
         {
             top.GetComponent<MeshRenderer>().material = orange;
+            canPlaySound = true;
         }
         else
         {
             top.GetComponent<MeshRenderer>().material = purple;
+            if (canPlaySound)
+            {
+                springSound.Play();
+                canPlaySound = false;
+            }
         }
 
         // Squeezes the spring quad when the spring is being pressed down

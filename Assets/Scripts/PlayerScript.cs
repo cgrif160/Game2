@@ -27,9 +27,10 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI carrotsText;
     public Animator berryAnimator;
     public Animator carrotAnimator;
+    public AudioSource buttonPressSound;
     public AudioSource switchSound;
     public AudioSource switchFailSound;
-    public AudioSource buttonPressSound;
+    public AudioSource deathSound;
 
     private Rigidbody rb;
     private float movementInput;
@@ -120,6 +121,12 @@ public class PlayerScript : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
             canJump = false;
+        }
+
+        // The player screams if they start falling
+        if (transform.position.y < -1 && !deathSound.isPlaying)
+        {
+            deathSound.Play();
         }
 
         // Respawns the player if they fall below the level
