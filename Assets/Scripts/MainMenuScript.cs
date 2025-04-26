@@ -23,7 +23,7 @@ public class MainMenuScript : MonoBehaviour
     // Plays a sound for when a button is pressed
     public void ButtonPress()
     {
-        //buttonPress.Play();
+        buttonPress.Play();
     }
 
     // Loads the first level
