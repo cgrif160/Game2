@@ -1,28 +1,46 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Plays background music from scene to scene
+// Plays the correct music from scene to scene
 public class MusicScript : MonoBehaviour
 {
-    public MusicScript instance;
+    public AudioSource ambienceLoop;
+    public AudioSource musicLoop;
+    public AudioSource winSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created    
-    void Start()
+    private void Start()
     {
-        if(instance == null)
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == 0)
         {
-            if (SceneManager.GetActiveScene().buildIndex < 1)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-        }
-        else
-        {
-            Destroy(instance);
+            musicLoop.Stop();
+            ambienceLoop.Play();
         }
 
-        AudioSource music = GetComponent<AudioSource>();
-        music.Play();
+        if (scene.buildIndex == 1)
+        {
+            ambienceLoop.Stop();
+            musicLoop.Play();
+        }
+
+        if (scene.buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            winSound.Play();
+        }
     }
 }

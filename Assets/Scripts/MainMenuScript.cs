@@ -6,7 +6,7 @@ public class MainMenuScript : MonoBehaviour
 {
     public GameObject title;
     public GameObject controls;
-    public AudioSource buttonPress;
+    public AudioSource buttonPressSound;
 
     private bool isControls = false;
 
@@ -23,7 +23,7 @@ public class MainMenuScript : MonoBehaviour
     // Plays a sound for when a button is pressed
     public void ButtonPress()
     {
-        buttonPress.Play();
+        buttonPressSound.Play();
     }
 
     // Loads the first level

@@ -755,7 +755,7 @@ MonoBehaviour:
   carrotAnimator: {fileID: 2011991392}
   switchSound: {fileID: 0}
   switchFailSound: {fileID: 0}
-  buttonPress: {fileID: 253327529}
+  buttonPressSound: {fileID: 253327529}
 --- !u!54 &253327528
 Rigidbody:
   m_ObjectHideFlags: 0

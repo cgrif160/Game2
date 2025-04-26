@@ -29,7 +29,7 @@ public class PlayerScript : MonoBehaviour
     public Animator carrotAnimator;
     public AudioSource switchSound;
     public AudioSource switchFailSound;
-    public AudioSource buttonPress;
+    public AudioSource buttonPressSound;
 
     private Rigidbody rb;
     private float movementInput;
@@ -253,7 +253,7 @@ public class PlayerScript : MonoBehaviour
     // Plays a sound for when a button is pressed
     public void ButtonPress()
     {
-        buttonPress.Play();
+        buttonPressSound.Play();
     }
 
     // Displays the controls
