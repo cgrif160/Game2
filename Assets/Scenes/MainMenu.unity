@@ -517,8 +517,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 420d61b3e82a3b14bbe9012dec5aba34, type: 3}
-  m_Resource: {fileID: 8300000, guid: 420d61b3e82a3b14bbe9012dec5aba34, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d8c5f473388296c4abe4108c4b4b9d94, type: 3}
+  m_Resource: {fileID: 8300000, guid: d8c5f473388296c4abe4108c4b4b9d94, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2254,18 +2254,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2021087670}
         m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
-        m_MethodName: ButtonPress
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2021087670}
-        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -2623,7 +2611,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 264d8c8ae335b06448cf73732dd753ee, type: 3}
   m_Resource: {fileID: 8300000, guid: 264d8c8ae335b06448cf73732dd753ee, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

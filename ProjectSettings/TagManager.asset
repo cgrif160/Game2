@@ -9,6 +9,7 @@ TagManager:
   - Carrot
   - Screw
   - Checkpoint
+  - Pit
   layers:
   - Default
   - TransparentFX

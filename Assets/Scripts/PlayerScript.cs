@@ -28,8 +28,11 @@ public class PlayerScript : MonoBehaviour
     public Animator berryAnimator;
     public Animator carrotAnimator;
     public AudioSource buttonPressSound;
+    public AudioSource pauseSound;
+    public AudioSource jumpSound;
     public AudioSource switchSound;
     public AudioSource switchFailSound;
+    public AudioSource collectibleSound;
     public AudioSource deathSound;
 
     private Rigidbody rb;
@@ -92,11 +95,11 @@ public class PlayerScript : MonoBehaviour
             if (!hitbox.GetComponent<HitboxScript>().isColliding)
             {
                 Switch();
-                //switchSound.Play();
+                switchSound.Play();
             }
             else
             {
-                //switchFailSound.Play();
+                switchFailSound.Play();
             }
         }
 
@@ -121,12 +124,7 @@ public class PlayerScript : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpSpeed, ForceMode.Impulse);
             canJump = false;
-        }
-
-        // The player screams if they start falling
-        if (transform.position.y < -1 && !deathSound.isPlaying)
-        {
-            deathSound.Play();
+            jumpSound.Play();
         }
 
         // Respawns the player if they fall below the level
@@ -173,6 +171,7 @@ public class PlayerScript : MonoBehaviour
             berriesCount += 1;
             berriesBackgroundText.text = "BERRIES: " + berriesCount;
             berriesText.text = "BERRIES: " + berriesCount;
+            collectibleSound.Play();
         }
 
         // Checks if the player is colliding with a carrot collectible
@@ -182,6 +181,13 @@ public class PlayerScript : MonoBehaviour
             carrotsCount += 1;
             carrotsBackgroundText.text = "CARROTS: " + carrotsCount;
             carrotsText.text = "CARROTS: " + carrotsCount;
+            collectibleSound.Play();
+        }
+
+        // The player screams if they start falling
+        if (collider.gameObject.tag == "Pit" && !deathSound.isPlaying)
+        {
+            deathSound.Play();
         }
     }
 
@@ -247,6 +253,7 @@ public class PlayerScript : MonoBehaviour
         mainMenuButton.SetActive(!isControls);
         quitButton.SetActive(!isControls);
         controls.SetActive(isControls);
+        pauseSound.Play();
     }
 
     // Unpauses the game
