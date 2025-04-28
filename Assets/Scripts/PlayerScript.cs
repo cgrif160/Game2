@@ -29,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     public Animator carrotAnimator;
     public AudioSource buttonPressSound;
     public AudioSource pauseSound;
+    public AudioSource tapSound;
     public AudioSource jumpSound;
     public AudioSource switchSound;
     public AudioSource switchFailSound;
@@ -198,6 +199,10 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        tapSound.Play();
+    }
     // Called if the player is colliding with something
     void OnCollisionStay(Collision collision)
     {
