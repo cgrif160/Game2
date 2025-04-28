@@ -127,6 +127,12 @@ public class PlayerScript : MonoBehaviour
             jumpSound.Play();
         }
 
+        // Fades out the player's scream if they're falling in a pit
+        if (deathSound.isPlaying)
+        {
+            deathSound.volume -= 0.01f;
+        }
+
         // Respawns the player if they fall below the level
         if (transform.position.y < -10)
         {
@@ -184,9 +190,10 @@ public class PlayerScript : MonoBehaviour
             collectibleSound.Play();
         }
 
-        // The player screams if they start falling
+        // The player screams if they start falling in a pit
         if (collider.gameObject.tag == "Pit" && !deathSound.isPlaying)
         {
+            deathSound.volume = 1;
             deathSound.Play();
         }
     }
